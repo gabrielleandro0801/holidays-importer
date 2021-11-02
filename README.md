@@ -1,4 +1,4 @@
-# Holidays Importer
+# Holidays Importer :calendar: :brazil:
 
 AWS Lambda Function to import Febraban holidays from API **api.calendario.com** and save them somewhere using **Localstack**.
 
@@ -18,7 +18,7 @@ This [link](https://github.com/localstack/localstack) may help you.
 pip3 install awscli-local
 ```
 
-## Running
+## Running :computer:
 ### v1
 1. Start Localstack
 ``` shell
@@ -64,3 +64,8 @@ awslocal dynamodb scan --table-name my_holidays
 ```
 
 If the scan command returns some holidays, congrats, the execution went well! :smile:
+
+### Acknowledgments :clap:
+Those links below helped me during the development.
+
+- [link 1](https://www.rtancman.com.br/python/aws/organizando-aws-lambda-escrito-python.html)
