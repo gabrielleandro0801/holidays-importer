@@ -1,4 +1,4 @@
-TYPES = {
+CATEGORIES: dict = {
     'NACIONAL': 'NACIONAL',
     'MUNICIPAL': 'MUNICIPAL',
     'FACULTATIVO': 'FACULTATIVO'
@@ -7,26 +7,25 @@ TYPES = {
 
 class Holiday:
 
-    def __init__(self, date, name, type):
-        self._date = date
-        self._name = name
-        self._type = type
+    def __init__(self, date: str, name: str, category: str):
+        self.__date = date
+        self.__name = name
+        self.__category = category
 
-    def is_type(self, type: str) -> bool:
-        return self._type == type
+    def is_category(self, category: str) -> bool:
+        return self.__category == category
 
-    def get_date(self) -> str:
-        return self._date
+    @property
+    def date(self) -> str:
+        return self.__date
 
-    def get_name(self) -> str:
-        return self._name
-
-    def get_type(self) -> str:
-        return self._type
+    @property
+    def name(self) -> str:
+        return self.__name
 
     def to_json(self) -> dict:
         return {
-            'date': self._date,
-            'name': self._name,
-            'type': self._type
+            'date': self.__date,
+            'name': self.__name,
+            'type': self.__category
         }

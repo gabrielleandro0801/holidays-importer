@@ -1,6 +1,6 @@
-from v1.domain.holiday import Holiday, TYPES
+from v1.domain.holiday import Holiday, CATEGORIES
 
-HOLIDAYS = {
+HOLIDAYS: dict = {
     'TO_INCLUDE': 'carnaval',
     'TO_IGNORE': 'antecipação'
 }
@@ -11,9 +11,9 @@ class HolidayFilter:
         pass
 
     def check_type(self, holiday: Holiday) -> Holiday or False:
-        holiday_name: str = holiday.get_name().lower()
+        holiday_name: str = holiday.name.lower()
 
-        if holiday.is_type(TYPES["NACIONAL"]) or holiday.is_type(TYPES["MUNICIPAL"]):
+        if holiday.is_category(CATEGORIES["NACIONAL"]) or holiday.is_category(CATEGORIES["MUNICIPAL"]):
             return holiday if holiday_name.find(HOLIDAYS['TO_IGNORE']) == -1 else False
 
         return holiday if holiday_name.find(HOLIDAYS["TO_INCLUDE"]) == 0 else False

@@ -12,13 +12,13 @@ DATE: dict = {
 }
 
 
-def format_date(date: str):
+def format_date(date: str) -> str:
     from datetime import datetime
     formatted_date = datetime.strptime(date, DATE["FROM"])
     return formatted_date.strftime(DATE["TO"])
 
 
-def get_type_name(type_code: str) -> str or None:
+def get_category_name(type_code: str) -> str or None:
     return HOLIDAYS_TYPE[type_code] if type_code in HOLIDAYS_TYPE else None
 
 
@@ -28,15 +28,15 @@ class HolidayTranslator:
         pass
 
     def translate(self, holiday: dict) -> Holiday or None:
-        type_name: str or None = get_type_name(type_code=str(holiday["type_code"]))
+        category_name: str or None = get_category_name(type_code=str(holiday["type_code"]))
 
-        if type_name is None:
+        if category_name is None:
             return
 
         return Holiday(
             date=format_date(holiday["date"]),
             name=holiday["name"],
-            type=type_name
+            category=category_name
         )
 
     def clean(self, holiday: Holiday) -> Holiday:

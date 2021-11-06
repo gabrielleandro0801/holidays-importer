@@ -20,7 +20,7 @@ class HolidayService:
         clean_holidays = {}
 
         for holiday in holidays:
-            if holiday.get_date() not in clean_holidays:
-                clean_holidays[holiday.get_date()] = holiday
+            if holiday.date not in clean_holidays:
+                clean_holidays[holiday.date] = holiday
 
         return list(clean_holidays.values())
