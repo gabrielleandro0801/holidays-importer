@@ -1,4 +1,3 @@
-import os
 import boto3
 from typing import List
 
@@ -6,11 +5,7 @@ from v1.domain.holiday import Holiday
 from v1.domain.holiday_filter import HolidayFilter
 from v1.domain.holiday_service import HolidayService
 from v1.infrastructure.calendar.calendar_gateway import create_calendar_gateway
-from v1.infrastructure.persistence.holiday_dynamo_repository import HolidayDynamoRepository
-
-
-HOST = os.getenv('LOCALSTACK_HOSTNAME', 'localhost')
-PORT = os.getenv('EDGE_PORT', '4566')
+from v1.infrastructure.persistence.holiday_dynamo_repository import HolidayDynamoRepository, get_dynamo_client
 
 
 class FebrabanHolidayApplicationService:
@@ -33,10 +28,6 @@ def configure_application_service() -> FebrabanHolidayApplicationService:
             holiday_filter=HolidayFilter()
         ),
         holiday_repository=HolidayDynamoRepository(
-            dynamo_client=session.resource(
-                service_name='dynamodb',
-                region_name='us-east-1',
-                endpoint_url=f'http://{HOST}:{PORT}'
-            )
+            dynamo_client=get_dynamo_client(session=session)
         )
     )

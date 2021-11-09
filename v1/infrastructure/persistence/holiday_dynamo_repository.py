@@ -1,8 +1,25 @@
+import os
 from typing import List, Any
 from v1.domain.holiday import Holiday
 from v1.infrastructure.logger.log import logger
 
 TABLE_NAME = 'my_holidays'
+ENV = os.getenv('ENV', 'local')
+HOST = os.getenv('LOCALSTACK_HOSTNAME', 'localhost')
+PORT = os.getenv('EDGE_PORT', '4566')
+
+
+def get_dynamo_client(session: Any):
+    if ENV == 'local':
+        return session.resource(
+            service_name='dynamodb',
+            region_name='us-east-1',
+            endpoint_url=f'http://{HOST}:{PORT}'
+        )
+    return session.resource(
+        service_name='dynamodb',
+        region_name='us-east-1'
+    )
 
 
 def translate_holiday_to_dynamo(holiday: Holiday) -> dict:
