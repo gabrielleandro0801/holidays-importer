@@ -3,22 +3,26 @@ from typing import List, Any
 from v1.domain.holiday import Holiday
 from v1.infrastructure.logger.log import logger
 
-TABLE_NAME = 'my_holidays'
+TABLE_NAME = 'report_ccs_holidays'
+
 ENV = os.getenv('ENV', 'local')
 HOST = os.getenv('LOCALSTACK_HOSTNAME', 'localhost')
 PORT = os.getenv('EDGE_PORT', '4566')
 
 
-def get_dynamo_client(session: Any):
-    if ENV == 'local':
-        return session.resource(
-            service_name='dynamodb',
-            region_name='us-east-1',
-            endpoint_url=f'http://{HOST}:{PORT}'
-        )
+def get_endpoint_url() -> str or None:
+    options: dict = {
+        'local': f'http://{HOST}:{PORT}'
+    }
+    return options[ENV] if ENV in options else None
+
+
+def get_dynamo_client(session: Any) -> Any:
+    endpoint_url: str or None = get_endpoint_url()
     return session.resource(
         service_name='dynamodb',
-        region_name='us-east-1'
+        region_name='us-east-1',
+        endpoint_url=endpoint_url
     )
 
 

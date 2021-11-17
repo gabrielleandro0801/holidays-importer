@@ -1,8 +1,6 @@
 import boto3
 from typing import List
-
 from v1.domain.holiday import Holiday
-from v1.domain.holiday_filter import HolidayFilter
 from v1.domain.holiday_service import HolidayService
 from v1.infrastructure.calendar.calendar_gateway import create_calendar_gateway
 from v1.infrastructure.persistence.holiday_dynamo_repository import HolidayDynamoRepository, get_dynamo_client
@@ -14,8 +12,8 @@ class FebrabanHolidayApplicationService:
         self.holiday_service = holiday_service
         self.holiday_repository = holiday_repository
 
-    def import_holidays(self) -> None:
-        holidays: List[Holiday] = self.holiday_service.list_febraban_holidays()
+    def import_holidays(self, year: int) -> None:
+        holidays: List[Holiday] = self.holiday_service.list_febraban_holidays(year=year)
         self.holiday_repository.save(holidays=holidays)
 
 
@@ -24,8 +22,7 @@ def configure_application_service() -> FebrabanHolidayApplicationService:
 
     return FebrabanHolidayApplicationService(
         holiday_service=HolidayService(
-            calendar_gateway=create_calendar_gateway(),
-            holiday_filter=HolidayFilter()
+            calendar_gateway=create_calendar_gateway()
         ),
         holiday_repository=HolidayDynamoRepository(
             dynamo_client=get_dynamo_client(session=session)

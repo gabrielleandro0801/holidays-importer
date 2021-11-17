@@ -1,10 +1,3 @@
-CATEGORIES: dict = {
-    'NACIONAL': 'NACIONAL',
-    'MUNICIPAL': 'MUNICIPAL',
-    'FACULTATIVO': 'FACULTATIVO'
-}
-
-
 class Holiday:
 
     def __init__(self, date: str, name: str, category: str):

@@ -1,6 +1,6 @@
 # Holidays Importer :calendar: :brazil:
 
-AWS Lambda Function to import Febraban holidays from API **api.calendario.com** and save them somewhere using **Localstack**.
+AWS Lambda Function to import Febraban holidays from API **https://brasilapi.com.br/docs#tag/Brasil-API** and save them in an AWS Resource using **Localstack**.
 
 ## v1
 It saves the holidays in a DynamoDB table named **my_holidays**, where each register is a holiday.

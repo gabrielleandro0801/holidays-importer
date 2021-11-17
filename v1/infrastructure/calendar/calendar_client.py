@@ -3,15 +3,17 @@ from typing import List
 from v1.infrastructure.logger.log import logger
 
 
+REQUEST_SECONDS_TIMEOUT = 5
+
+
 class CalendarClient:
 
-    def __init__(self, url: str, token: str):
+    def __init__(self, url: str):
         self._url: str = url
-        self._token: str = token
 
-    def list(self, params: dict) -> List[dict]:
-        params["token"] = self._token
-        logger.info({"event": "list", "detail": "Getting holidays from API", "url": self._url, "params": params})
+    def list(self, year: int) -> List[dict]:
+        complete_url: str = f"{self._url}{year}"
+        logger.info({"event": "list", "detail": "Getting holidays from API", "url": complete_url})
 
-        response = requests.get(url=self._url, params=params)
+        response = requests.get(url=complete_url, timeout=REQUEST_SECONDS_TIMEOUT)
         return response.json()
