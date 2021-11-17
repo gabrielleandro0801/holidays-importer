@@ -3,7 +3,7 @@ from typing import List, Any
 from v1.domain.holiday import Holiday
 from v1.infrastructure.logger.log import logger
 
-TABLE_NAME = 'report_ccs_holidays'
+TABLE_NAME = 'my_holidays'
 
 ENV = os.getenv('ENV', 'local')
 HOST = os.getenv('LOCALSTACK_HOSTNAME', 'localhost')
