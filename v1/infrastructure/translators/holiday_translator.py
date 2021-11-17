@@ -1,25 +1,16 @@
+from datetime import datetime
 from v1.domain.holiday import Holiday
 
-HOLIDAYS_TYPE: dict = {
-    '1': 'NACIONAL',
-    '3': 'MUNICIPAL',
-    '4': 'FACULTATIVO'
-}
 
 DATE: dict = {
-    'FROM': '%d/%m/%Y',
-    'TO': '%Y-%m-%d'
+    'FROM': '%Y-%m-%d',
+    'TO': '%Y/%m/%d'
 }
 
 
-def format_date(date: str):
-    from datetime import datetime
-    formatted_date = datetime.strptime(date, DATE["FROM"])
+def format_date(date: str) -> str:
+    formatted_date: datetime = datetime.strptime(date, DATE["FROM"])
     return formatted_date.strftime(DATE["TO"])
-
-
-def get_type_name(type_code: str) -> str or None:
-    return HOLIDAYS_TYPE[type_code] if type_code in HOLIDAYS_TYPE else None
 
 
 class HolidayTranslator:
@@ -28,15 +19,12 @@ class HolidayTranslator:
         pass
 
     def translate(self, holiday: dict) -> Holiday or None:
-        type_name: str or None = get_type_name(type_code=str(holiday["type_code"]))
-
-        if type_name is None:
-            return
+        category: str or None = holiday["type"].upper()
 
         return Holiday(
             date=format_date(holiday["date"]),
             name=holiday["name"],
-            type=type_name
+            category=category
         )
 
     def clean(self, holiday: Holiday) -> Holiday:
