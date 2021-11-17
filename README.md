@@ -57,6 +57,10 @@ awslocal dynamodb create-table --table-name my_holidays \
 ``` shell
 awslocal lambda invoke --function-name holidays_importer --payload '{}' output.txt
 ```
+or
+``` shell
+awslocal lambda invoke --function-name holidays_importer --payload '{"year": 2021}' output.txt
+```
 
 7. Scan the DynamoDB table
 ``` shell
