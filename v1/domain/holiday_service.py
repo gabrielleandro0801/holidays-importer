@@ -1,7 +1,6 @@
-from typing import List
-
+from typing import List, Any
 from v1.domain.holiday import Holiday
-from v1.infrastructure.calendar.calendar_gateway import CalendarGateway
+from v1.infrastructure.calendar.calendar_gateway import CalendarGateway, create_calendar_gateway
 
 
 class HolidayService:
@@ -21,3 +20,10 @@ class HolidayService:
                 clean_holidays[holiday.date] = holiday
 
         return list(clean_holidays.values())
+
+
+def create_holiday_service() -> Any:
+    calendar_gateway_factory: Any = create_calendar_gateway()
+    return lambda: HolidayService(
+        calendar_gateway=calendar_gateway_factory()
+    )

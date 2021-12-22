@@ -1,8 +1,8 @@
-from typing import List
+from typing import List, Any
 
 from v1.domain.holiday import Holiday
-from v1.infrastructure.calendar.calendar_client import CalendarClient
-from v1.infrastructure.translators.holiday_translator import HolidayTranslator
+from v1.infrastructure.calendar.calendar_client import CalendarClient, create_calendar_client
+from v1.infrastructure.translators.holiday_translator import HolidayTranslator, create_holiday_translator
 
 
 class CalendarGateway:
@@ -17,10 +17,11 @@ class CalendarGateway:
         return list(filter(self.translator.clean, holidays))
 
 
-def create_calendar_gateway():
-    return CalendarGateway(
-        calendar_client=CalendarClient(
-            url="https://brasilapi.com.br/api/feriados/v1/"
-        ),
-        holiday_translator=HolidayTranslator()
+def create_calendar_gateway() -> Any:
+    calendar_client_factory: Any = create_calendar_client()
+    holiday_translator_factory: Any = create_holiday_translator()
+
+    return lambda: CalendarGateway(
+        calendar_client=calendar_client_factory(),
+        holiday_translator=holiday_translator_factory()
     )

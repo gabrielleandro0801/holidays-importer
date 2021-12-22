@@ -1,4 +1,6 @@
 from datetime import datetime
+from typing import Any
+
 from v1.domain.holiday import Holiday
 
 
@@ -30,3 +32,7 @@ class HolidayTranslator:
     def clean(self, holiday: Holiday) -> Holiday:
         if holiday is not None:
             return holiday
+
+
+def create_holiday_translator() -> Any:
+    return lambda: HolidayTranslator()

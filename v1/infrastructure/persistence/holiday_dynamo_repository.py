@@ -46,3 +46,10 @@ class HolidayDynamoRepository:
                 batch.put_item(
                     Item=holiday_to_insert
                 )
+
+
+def create_holiday_dynamo_repository(session: Any) -> Any:
+    return lambda: HolidayDynamoRepository(
+        dynamo_client=get_dynamo_client(session=session)
+    )
+

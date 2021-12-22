@@ -1,9 +1,9 @@
 import boto3
-from typing import List
+from typing import List, Any
 from v1.domain.holiday import Holiday
-from v1.domain.holiday_service import HolidayService
-from v1.infrastructure.calendar.calendar_gateway import create_calendar_gateway
-from v1.infrastructure.persistence.holiday_dynamo_repository import HolidayDynamoRepository, get_dynamo_client
+from v1.domain.holiday_service import HolidayService, create_holiday_service
+from v1.infrastructure.persistence.holiday_dynamo_repository import HolidayDynamoRepository, \
+    create_holiday_dynamo_repository
 
 
 class FebrabanHolidayApplicationService:
@@ -17,14 +17,13 @@ class FebrabanHolidayApplicationService:
         self.holiday_repository.save(holidays=holidays)
 
 
-def configure_application_service() -> FebrabanHolidayApplicationService:
+def create_application_service() -> FebrabanHolidayApplicationService:
     session = boto3.session.Session()
 
+    holiday_service_factory: Any = create_holiday_service()
+    repository_factory: Any = create_holiday_dynamo_repository(session=session)
+
     return FebrabanHolidayApplicationService(
-        holiday_service=HolidayService(
-            calendar_gateway=create_calendar_gateway()
-        ),
-        holiday_repository=HolidayDynamoRepository(
-            dynamo_client=get_dynamo_client(session=session)
-        )
+        holiday_service=holiday_service_factory(),
+        holiday_repository=repository_factory()
     )
