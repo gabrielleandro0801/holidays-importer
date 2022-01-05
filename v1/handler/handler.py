@@ -1,16 +1,14 @@
 from datetime import datetime
 from typing import Any
-
-from v1.application.febraban_holiday_application_service import FebrabanHolidayApplicationService, \
-    create_application_service
 from v1.infrastructure.logger.log import logger
+import v1.application.febraban_holiday_application_service as application
 
 
 def get_year_from_event(lambda_event: Any) -> int:
     return lambda_event["year"] if 'year' in lambda_event else datetime.now().year
 
 
-application_service: FebrabanHolidayApplicationService = create_application_service()
+application_service: application.FebrabanHolidayApplicationService = application.create_application_service()
 
 
 def main(lambda_event: Any, context: Any):

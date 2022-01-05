@@ -1,15 +1,14 @@
 from typing import List, Any
-
 from v1.domain.holiday import Holiday
-from v1.infrastructure.calendar.calendar_client import CalendarClient, create_calendar_client
-from v1.infrastructure.translators.holiday_translator import HolidayTranslator, create_holiday_translator
+import v1.infrastructure.calendar.calendar_client as client
+import v1.infrastructure.translators.holiday_translator as translator
 
 
 class CalendarGateway:
 
-    def __init__(self, calendar_client: CalendarClient, holiday_translator: HolidayTranslator):
-        self.calendar_client: CalendarClient = calendar_client
-        self.translator: HolidayTranslator = holiday_translator
+    def __init__(self, calendar_client: client.CalendarClient, holiday_translator: translator.HolidayTranslator):
+        self.calendar_client: client.CalendarClient = calendar_client
+        self.translator: translator.HolidayTranslator = holiday_translator
 
     def list(self, year: int) -> List[Holiday]:
         holidays: List[dict] = self.calendar_client.list(year=year)
@@ -18,8 +17,8 @@ class CalendarGateway:
 
 
 def create_calendar_gateway() -> Any:
-    calendar_client_factory: Any = create_calendar_client()
-    holiday_translator_factory: Any = create_holiday_translator()
+    calendar_client_factory: Any = client.create_calendar_client()
+    holiday_translator_factory: Any = translator.create_holiday_translator()
 
     return lambda: CalendarGateway(
         calendar_client=calendar_client_factory(),

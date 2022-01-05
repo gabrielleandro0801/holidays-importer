@@ -1,6 +1,5 @@
 from datetime import datetime
 from typing import Any
-
 from v1.domain.holiday import Holiday
 
 

@@ -4,7 +4,7 @@ from v1.domain.holiday import Holiday
 
 class TestHoliday(TestCase):
 
-    def test_holiday_object_is_being_created(self):
+    def test_holiday_instance_must_have_been_created(self):
         holiday: Holiday = Holiday(
             date='2021/12/25',
             category='NATIONAL',

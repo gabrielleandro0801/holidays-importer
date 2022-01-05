@@ -2,13 +2,12 @@ import boto3
 from typing import List, Any
 from v1.domain.holiday import Holiday
 from v1.domain.holiday_service import HolidayService, create_holiday_service
-from v1.infrastructure.persistence.holiday_dynamo_repository import HolidayDynamoRepository, \
-    create_holiday_dynamo_repository
+import v1.infrastructure.persistence.holiday_dynamo_repository as repository
 
 
 class FebrabanHolidayApplicationService:
 
-    def __init__(self, holiday_service: HolidayService, holiday_repository: HolidayDynamoRepository):
+    def __init__(self, holiday_service: HolidayService, holiday_repository: repository.HolidayDynamoRepository):
         self.holiday_service = holiday_service
         self.holiday_repository = holiday_repository
 
@@ -21,7 +20,7 @@ def create_application_service() -> FebrabanHolidayApplicationService:
     session = boto3.session.Session()
 
     holiday_service_factory: Any = create_holiday_service()
-    repository_factory: Any = create_holiday_dynamo_repository(session=session)
+    repository_factory: Any = repository.create_holiday_dynamo_repository(session=session)
 
     return FebrabanHolidayApplicationService(
         holiday_service=holiday_service_factory(),
