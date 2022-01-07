@@ -69,7 +69,18 @@ awslocal dynamodb scan --table-name my_holidays
 
 If the scan command returns some holidays, congrats, the execution went well! :smile:
 
+## Running Unit Tests :computer:
+``` shell
+coverage run -m unittest
+```
+or, if you want to see the report
+``` shell
+coverage run -m unittest && coverage report
+```
+
 ### Acknowledgments :clap:
 Those links below helped me during the development.
 
 - [link 1](https://www.rtancman.com.br/python/aws/organizando-aws-lambda-escrito-python.html)
+- [link 2](https://python.plainenglish.io/a-quick-intro-to-to-test-coverage-in-python-9bf299711c6c)
+- [link 3](https://stackoverflow.com/questions/1732438/how-do-i-run-all-python-unit-tests-in-a-directory)
