@@ -1,6 +1,6 @@
 import requests
 from typing import List, Any
-from v1.infrastructure.logger.log import logger
+from src.infrastructure.logger.log import logger
 
 
 REQUEST_SECONDS_TIMEOUT = 5

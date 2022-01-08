@@ -1,8 +1,8 @@
 import boto3
 from typing import List, Any
-from v1.domain.holiday import Holiday
-from v1.domain.holiday_service import HolidayService, create_holiday_service
-import v1.infrastructure.persistence.holiday_dynamo_repository as repository
+from src.domain.holiday import Holiday
+from src.domain.holiday_service import HolidayService, create_holiday_service
+import src.infrastructure.persistence.holiday_dynamo_repository as repository
 
 
 class FebrabanHolidayApplicationService:

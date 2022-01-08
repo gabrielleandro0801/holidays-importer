@@ -1,6 +1,6 @@
 from typing import List, Any
-from v1.domain.holiday import Holiday
-import v1.infrastructure.calendar.calendar_gateway as gateway
+from src.domain.holiday import Holiday
+import src.infrastructure.calendar.calendar_gateway as gateway
 
 
 class HolidayService:

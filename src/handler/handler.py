@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Any
-from v1.infrastructure.logger.log import logger
-import v1.application.febraban_holiday_application_service as application
+from src.infrastructure.logger.log import logger
+import src.application.febraban_holiday_application_service as application
 
 
 def get_year_from_event(lambda_event: Any) -> int:

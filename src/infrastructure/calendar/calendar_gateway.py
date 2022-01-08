@@ -1,7 +1,7 @@
 from typing import List, Any
-from v1.domain.holiday import Holiday
-import v1.infrastructure.calendar.calendar_client as client
-import v1.infrastructure.translators.holiday_translator as translator
+from src.domain.holiday import Holiday
+import src.infrastructure.calendar.calendar_client as client
+import src.infrastructure.translators.holiday_translator as translator
 
 
 class CalendarGateway:

@@ -1,5 +1,5 @@
 from unittest import TestCase
-from v1.domain.holiday import Holiday
+from src.domain.holiday import Holiday
 
 
 class TestHoliday(TestCase):

@@ -1,7 +1,7 @@
 import os
 from typing import List, Any
-from v1.domain.holiday import Holiday
-from v1.infrastructure.logger.log import logger
+from src.domain.holiday import Holiday
+from src.infrastructure.logger.log import logger
 
 TABLE_NAME = 'my_holidays'
 

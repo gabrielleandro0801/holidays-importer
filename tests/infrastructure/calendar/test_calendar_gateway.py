@@ -1,5 +1,5 @@
 from unittest import TestCase, mock
-from v1.infrastructure.calendar.calendar_gateway import CalendarGateway
+from src.infrastructure.calendar.calendar_gateway import CalendarGateway
 
 
 class TestCalendarGateway(TestCase):

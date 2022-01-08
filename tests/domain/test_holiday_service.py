@@ -1,19 +1,19 @@
 from unittest import TestCase, mock
 from unittest.mock import patch
 
-from v1.domain.holiday import Holiday
-from v1.domain.holiday_service import HolidayService
+from src.domain.holiday import Holiday
+from src.domain.holiday_service import HolidayService
 
 LIST_FEBRABAN_HOLIDAYS_RESPONSE = None
 
 
 class TestHolidayService(TestCase):
 
-    @mock.patch('v1.infrastructure.calendar.calendar_gateway.CalendarGateway', autospec=True)
+    @mock.patch('src.infrastructure.calendar.calendar_gateway.CalendarGateway', autospec=True)
     def setUp(self, mock_calendar_gateway) -> None:
         self.holiday_service = HolidayService(mock_calendar_gateway)
 
-    @patch('v1.domain.holiday_service.HolidayService.list_febraban_holidays',
+    @patch('src.domain.holiday_service.HolidayService.list_febraban_holidays',
            return_value=LIST_FEBRABAN_HOLIDAYS_RESPONSE)
     def test_list_febraban_holidays_must_have_been_called_with_specified_year(self, list_febraban_holidays_response):
         year = 2021

@@ -1,6 +1,6 @@
 from unittest import TestCase
-from v1.domain.holiday import Holiday
-import v1.infrastructure.persistence.holiday_dynamo_repository as repository
+from src.domain.holiday import Holiday
+import src.infrastructure.persistence.holiday_dynamo_repository as repository
 
 HOLIDAY = Holiday(
     date='2021-12-25',

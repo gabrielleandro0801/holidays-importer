@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from v1.domain.holiday import Holiday
-from v1.infrastructure.translators.holiday_translator import HolidayTranslator, format_date
+from src.domain.holiday import Holiday
+from src.infrastructure.translators.holiday_translator import HolidayTranslator, format_date
 
 
 class TestHolidayTranslator(TestCase):

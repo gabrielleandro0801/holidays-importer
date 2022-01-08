@@ -1,12 +1,6 @@
 # Holidays Importer :calendar: :brazil:
 
-AWS Lambda Function to import Febraban holidays from API **[Brasil API](https://brasilapi.com.br/docs#tag/Brasil-API)** and save them in an AWS Resource using **Localstack**.
-
-## v1
-It saves the holidays in a DynamoDB table named **my_holidays**, where each register is a holiday.
-
-## v2 (To Do)
-It saves the holidays in a S3 Bucket, as a *.json* file.
+AWS Lambda Function to import Febraban holidays from API **[Brasil API](https://brasilapi.com.br/docs#tag/Brasil-API)** and save them in a DynamoDB table using **Localstack**.
 
 ## Setup
 1. In order to run Localstack, you will need to have *Docker* installed in your machine. 
@@ -19,7 +13,6 @@ pip3 install awscli-local
 ```
 
 ## Running :computer:
-### v1
 1. Start Localstack
 ``` shell
 LAMBDA_REMOTE_DOCKER=0 DEBUG=1 localstack start
