@@ -4,3 +4,4 @@ __pycache__
 *output.txt
 venv/
 six.py
+*,cover

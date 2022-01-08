@@ -1,7 +1,7 @@
 import json
 import logging
 
-logger = logging.getLogger('my_application')
+logger = logging.getLogger('holidays-importer')
 logger.setLevel(logging.INFO)
 
 ch = logging.StreamHandler()

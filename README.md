@@ -1,12 +1,6 @@
 # Holidays Importer :calendar: :brazil:
 
-AWS Lambda Function to import Febraban holidays from API **[Brasil API](https://brasilapi.com.br/docs#tag/Brasil-API)** and save them in an AWS Resource using **Localstack**.
-
-## v1
-It saves the holidays in a DynamoDB table named **my_holidays**, where each register is a holiday.
-
-## v2 (To Do)
-It saves the holidays in a S3 Bucket, as a *.json* file.
+AWS Lambda Function to import Febraban holidays from API **[Brasil API](https://brasilapi.com.br/docs#tag/Brasil-API)** and save them in a DynamoDB table using **Localstack**.
 
 ## Setup
 1. In order to run Localstack, you will need to have *Docker* installed in your machine. 
@@ -19,7 +13,6 @@ pip3 install awscli-local
 ```
 
 ## Running :computer:
-### v1
 1. Start Localstack
 ``` shell
 LAMBDA_REMOTE_DOCKER=0 DEBUG=1 localstack start
@@ -69,7 +62,18 @@ awslocal dynamodb scan --table-name my_holidays
 
 If the scan command returns some holidays, congrats, the execution went well! :smile:
 
+## Running Unit Tests :computer:
+``` shell
+coverage run -m unittest
+```
+or, if you want to see the report
+``` shell
+coverage run -m unittest && coverage report
+```
+
 ### Acknowledgments :clap:
 Those links below helped me during the development.
 
 - [link 1](https://www.rtancman.com.br/python/aws/organizando-aws-lambda-escrito-python.html)
+- [link 2](https://python.plainenglish.io/a-quick-intro-to-to-test-coverage-in-python-9bf299711c6c)
+- [link 3](https://stackoverflow.com/questions/1732438/how-do-i-run-all-python-unit-tests-in-a-directory)

@@ -1,7 +1,7 @@
 import os
 from typing import List, Any
-from v1.domain.holiday import Holiday
-from v1.infrastructure.logger.log import logger
+from src.domain.holiday import Holiday
+from src.infrastructure.logger.log import logger
 
 TABLE_NAME = 'my_holidays'
 
@@ -46,3 +46,10 @@ class HolidayDynamoRepository:
                 batch.put_item(
                     Item=holiday_to_insert
                 )
+
+
+def create_holiday_dynamo_repository(session: Any) -> Any:
+    return lambda: HolidayDynamoRepository(
+        dynamo_client=get_dynamo_client(session=session)
+    )
+

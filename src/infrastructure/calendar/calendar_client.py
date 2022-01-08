@@ -1,6 +1,6 @@
 import requests
-from typing import List
-from v1.infrastructure.logger.log import logger
+from typing import List, Any
+from src.infrastructure.logger.log import logger
 
 
 REQUEST_SECONDS_TIMEOUT = 5
@@ -17,3 +17,9 @@ class CalendarClient:
 
         response = requests.get(url=complete_url, timeout=REQUEST_SECONDS_TIMEOUT)
         return response.json()
+
+
+def create_calendar_client() -> Any:
+    return lambda: CalendarClient(
+        url='https://brasilapi.com.br/api/feriados/v1/'
+    )

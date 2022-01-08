@@ -1,13 +1,12 @@
-from typing import List
-
-from v1.domain.holiday import Holiday
-from v1.infrastructure.calendar.calendar_gateway import CalendarGateway
+from typing import List, Any
+from src.domain.holiday import Holiday
+import src.infrastructure.calendar.calendar_gateway as gateway
 
 
 class HolidayService:
 
-    def __init__(self, calendar_gateway: CalendarGateway):
-        self.calendar_gateway: CalendarGateway = calendar_gateway
+    def __init__(self, calendar_gateway: gateway.CalendarGateway):
+        self.calendar_gateway: gateway.CalendarGateway = calendar_gateway
 
     def list_febraban_holidays(self, year: int) -> List[Holiday]:
         holidays: List[Holiday] = self.calendar_gateway.list(year=year)
@@ -21,3 +20,10 @@ class HolidayService:
                 clean_holidays[holiday.date] = holiday
 
         return list(clean_holidays.values())
+
+
+def create_holiday_service() -> Any:
+    calendar_gateway_factory: Any = gateway.create_calendar_gateway()
+    return lambda: HolidayService(
+        calendar_gateway=calendar_gateway_factory()
+    )
