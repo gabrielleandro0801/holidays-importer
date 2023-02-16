@@ -16,7 +16,7 @@ application_service: FebrabanHolidayApplicationService = create_holiday_applicat
 
 def main(event: dict, context: Any):
     set_global_uuid(str(uuid.uuid4()))
-    logger.info({"event": "entrypoint", "detail": "Application started its job"})
+    logger.info({"event": "entrypoint", "details": "Application started its job"})
 
     year: int = get_year_from_event(event)
     application_service.import_holidays(year)

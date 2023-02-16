@@ -1,7 +1,6 @@
 from typing import List
 
-from src.domain.holiday import Holiday
-from src.domain.services.holiday import HolidayService
+from src.domain import Holiday, HolidayService
 from ..calendar import CalendarGateway
 
 

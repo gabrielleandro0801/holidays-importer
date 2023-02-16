@@ -14,7 +14,7 @@ class CalendarClient:
 
     def list(self, year: int) -> List[dict]:
         complete_url: str = f"{self._url}{year}"
-        logger.info({"event": "list", "detail": "Getting holidays from API", "url": complete_url})
+        logger.info({"event": "list", "details": "Getting holidays from API", "url": complete_url})
 
         response = requests.get(url=complete_url, timeout=REQUEST_TIMEOUT_IN_SECONDS)
         return response.json()

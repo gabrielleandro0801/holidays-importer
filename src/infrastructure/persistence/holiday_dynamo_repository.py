@@ -17,7 +17,7 @@ class HolidayDynamoRepository(HolidayRepository):
         with table.batch_writer() as batch:
             for holiday in holidays:
                 holiday_to_insert: dict = translate_holiday_to_dynamo(holiday)
-                logger.info({"event": "save", "detail": "Saving holiday", "holiday": holiday_to_insert})
+                logger.info({"event": "save", "details": "Saving holiday", "holiday": holiday_to_insert})
 
                 batch.put_item(
                     Item=holiday_to_insert
