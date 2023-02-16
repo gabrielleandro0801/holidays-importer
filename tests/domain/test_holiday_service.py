@@ -2,7 +2,7 @@ from unittest import TestCase, mock
 from unittest.mock import patch
 
 from src.domain.holiday import Holiday
-from src.domain.holiday_service import HolidayService
+from src.domain.services.holiday import HolidayService
 
 LIST_FEBRABAN_HOLIDAYS_RESPONSE = None
 

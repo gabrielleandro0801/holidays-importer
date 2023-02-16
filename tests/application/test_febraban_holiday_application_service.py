@@ -1,5 +1,5 @@
 from unittest import TestCase, mock
-from src.application.febraban_holiday_application_service import FebrabanHolidayApplicationService
+from src.application.febraban_holiday import FebrabanHolidayApplicationService
 from src.domain.holiday import Holiday
 
 LIST_FEBRABAN_HOLIDAYS_EMPTY_RESPONSE = []
