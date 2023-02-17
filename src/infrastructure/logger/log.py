@@ -24,15 +24,18 @@ class RequestFormatter(logging.Formatter):
         return super().format(record)
 
 
-requestType = "Message"
-formatter = RequestFormatter('{"severityText": "%(levelname)s", '
-                             f'"requestId": "%(requestId)s", '
-                             f'"requestType": "{requestType}", '
-                             '"timestamp": "%(asctime)s", '
-                             '"file": "%(filename)s", '
-                             '"function": "%(funcName)s", '
-                             '"line": "%(lineno)s", '
-                             '"msg": %(message)s} ')
+requestType: str = "Scheduled"
+log_format: str = json.dumps({
+  "severityText": "%(levelname)s",
+  "requestId": "%(requestId)s",
+  "requestType": requestType,
+  "timestamp": "%(asctime)s",
+  "file": "%(filename)s",
+  "function": "%(funcName)s",
+  "line": "%(lineno)s",
+  "message": "%(message)s"
+})
 
+formatter = RequestFormatter(log_format)
 ch.setFormatter(formatter)
 logger.addHandler(ch)

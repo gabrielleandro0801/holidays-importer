@@ -1,34 +1,10 @@
-from typing import Any
-
-import boto3
-
-from src.application import FebrabanHolidayApplicationService
-from src.infrastructure import HolidayServiceImpl, HolidayDynamoRepository, CalendarGateway, PROPERTIES, CalendarClient
+from src.application import FebrabanHolidayApplicationService, create_application_service
+from src.infrastructure import holiday_service_factory
+from src.infrastructure.persistence import create_holiday_repository as holiday_repository_factory
 
 
-def _get_dynamo_client() -> Any:
-    def get_endpoint_url() -> str or None:
-        return f'http://{PROPERTIES.get("HOST")}:{PROPERTIES.get("PORT")}' if PROPERTIES.get("ENV") == "local" else None
-
-    endpoint_url: str or None = get_endpoint_url()
-
-    session = boto3.Session()
-    return session.resource(
-        service_name="dynamodb",
-        region_name="us-east-1",
-        endpoint_url=endpoint_url
-    )
-
-def create_holiday_application_service():
-    return FebrabanHolidayApplicationService(
-        HolidayServiceImpl(
-            CalendarGateway(
-                CalendarClient(
-                    PROPERTIES.get("CALENDAR_API_URL"),
-                ),
-            ),
-        ),
-        HolidayDynamoRepository(
-            _get_dynamo_client(),
-        ),
+def create_holiday_application_service() -> FebrabanHolidayApplicationService:
+    return create_application_service(
+        holiday_service_factory(),
+        holiday_repository_factory(),
     )
