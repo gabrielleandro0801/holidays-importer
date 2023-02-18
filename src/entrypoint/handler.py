@@ -2,6 +2,10 @@ import uuid
 from datetime import datetime
 from typing import Any
 
+from dotenv import load_dotenv
+
+load_dotenv(verbose=False, override=True)
+
 from src import create_holiday_application_service
 from src.application import FebrabanHolidayApplicationService
 from src.infrastructure import logger, set_global_uuid
