@@ -23,11 +23,13 @@ class TestFebrabanHolidayApplicationService(TestCase):
         self.holiday_service.list_febraban_holidays.return_value = LIST_FEBRABAN_HOLIDAYS_EMPTY_RESPONSE
 
         self.application_service.import_holidays(year)
-        self.holiday_service.list_febraban_holidays.assert_called_with(year=2021)
+        self.holiday_service.list_febraban_holidays.assert_called_once_with(year)
+        self.holiday_repository.save.assert_called_once_with(LIST_FEBRABAN_HOLIDAYS_EMPTY_RESPONSE)
 
     def test_save_must_have_been_called_with_right_holidays(self):
         year = 2021
         self.holiday_service.list_febraban_holidays.return_value = LIST_FEBRABAN_HOLIDAYS_FULL_RESPONSE
 
         self.application_service.import_holidays(year)
-        self.holiday_repository.save.assert_called_with(holidays=LIST_FEBRABAN_HOLIDAYS_FULL_RESPONSE)
+        self.holiday_repository.save.assert_called_once_with(LIST_FEBRABAN_HOLIDAYS_FULL_RESPONSE)
+        self.holiday_repository.save.assert_called_once_with(LIST_FEBRABAN_HOLIDAYS_FULL_RESPONSE)

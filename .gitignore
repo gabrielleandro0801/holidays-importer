@@ -7,3 +7,4 @@ six.py
 *,cover
 .env
 my_zip.zip
+.coverage

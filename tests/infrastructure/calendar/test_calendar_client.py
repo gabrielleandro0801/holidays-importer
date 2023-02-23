@@ -1,5 +1,5 @@
 from unittest import TestCase
-from src.infrastructure.calendar.calendar_client import CalendarClient
+from src.infrastructure.calendar.client import CalendarClient
 import json
 import requests_mock
 

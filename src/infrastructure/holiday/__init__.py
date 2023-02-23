@@ -1,5 +1,5 @@
 from .service import HolidayServiceImpl
-from src.infrastructure.calendar.calendar_gateway import CalendarGateway
+from src.infrastructure.calendar.gateway import CalendarGateway
 
 
 def create_holiday_service(calendar_gateway: CalendarGateway):

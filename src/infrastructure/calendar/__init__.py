@@ -1,5 +1,5 @@
-from .calendar_client import CalendarClient
-from .calendar_gateway import CalendarGateway
+from .client import CalendarClient
+from .gateway import CalendarGateway
 from ..properties import PROPERTIES
 
 url: str = PROPERTIES.get("CALENDAR_API_URL")
