@@ -1,11 +1,10 @@
 from datetime import datetime
-from typing import Any
-from src.domain.holiday import Holiday
 
+from src.domain import Holiday
 
 DATE: dict = {
-    'FROM': '%Y-%m-%d',
-    'TO': '%Y/%m/%d'
+    "FROM": "%Y-%m-%d",
+    "TO": "%Y/%m/%d"
 }
 
 
@@ -16,10 +15,8 @@ def format_date(date: str) -> str:
 
 class HolidayTranslator:
 
-    def __init__(self):
-        pass
-
-    def translate(self, holiday: dict) -> Holiday or None:
+    @staticmethod
+    def translate(holiday: dict) -> Holiday or None:
         category: str or None = holiday["type"].upper()
 
         return Holiday(
@@ -28,10 +25,7 @@ class HolidayTranslator:
             category=category
         )
 
-    def clean(self, holiday: Holiday) -> Holiday:
+    @staticmethod
+    def clean(holiday: Holiday) -> Holiday:
         if holiday is not None:
             return holiday
-
-
-def create_holiday_translator() -> Any:
-    return lambda: HolidayTranslator()

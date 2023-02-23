@@ -32,8 +32,8 @@ pip3 install -r requirements.txt -t .
 ``` shell
 awslocal lambda create-function --function-name holidays_importer \
     --code S3Bucket="__local__",S3Key="$(pwd)" \
-    --handler v1/handler/handler.main \
-    --runtime python3.6 \
+    --handler src/entrypoint/handler.main \
+    --runtime python3.8 \
     --role bla \
     --zip-file fileb://my_zip.zip
 ```
@@ -61,6 +61,11 @@ awslocal dynamodb scan --table-name my_holidays
 ```
 
 If the scan command returns some holidays, congrats, the execution went well! :smile:
+
+If you need to delete the lambda function for any reason:
+``` shell
+awslocal lambda delete-function --function-name holidays_importer
+```
 
 ## Running Unit Tests :computer:
 ``` shell

@@ -5,20 +5,16 @@ class Holiday:
         self.__name = name
         self.__category = category
 
-    def is_category(self, category: str) -> bool:
-        return self.__category == category
-
     @property
     def date(self) -> str:
         return self.__date
 
-    @property
-    def name(self) -> str:
-        return self.__name
+    def is_category(self, category: str) -> bool:
+        return self.__category == category
 
     def to_json(self) -> dict:
         return {
-            'date': self.__date,
-            'name': self.__name,
-            'type': self.__category
+            "date": self.__date,
+            "name": self.__name,
+            "type": self.__category
         }
