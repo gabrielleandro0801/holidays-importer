@@ -16,12 +16,12 @@ class TestHolidayService(TestCase):
         self.calendar_gateway = mock.Mock()
         self.calendar_gateway.list.return_value = []
 
-        self.holiday_service = HolidayServiceImpl(self.calendar_gateway)
+        self.subject = HolidayServiceImpl(self.calendar_gateway)
 
     def test_list_specified_year(self):
         year = fake.unique.random_int()
 
-        self.holiday_service.list_febraban_holidays(year)
+        self.subject.list_febraban_holidays(year)
         self.calendar_gateway.list.assert_called_with(year)
 
     def test_holidays_list_must_have_no_duplications(self):
@@ -45,5 +45,5 @@ class TestHolidayService(TestCase):
         ]
 
         self.calendar_gateway.list.return_value = duplicated_holidays
-        response = self.holiday_service.list_febraban_holidays(year)
+        response = self.subject.list_febraban_holidays(year)
         self.assertEqual(len(response), 1, "Holidays list is greater than 1")

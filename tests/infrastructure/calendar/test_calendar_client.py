@@ -13,7 +13,7 @@ BASE_URL = "http://localhost:5000/"
 class TestCalendarClient(TestCase):
 
     def setUp(self) -> None:
-        self.calendar_client = CalendarClient(BASE_URL)
+        self.subject = CalendarClient(BASE_URL)
 
     @requests_mock.mock()
     def test_must_return_ok_response_for_valid_year(self, mock_request):
@@ -24,7 +24,7 @@ class TestCalendarClient(TestCase):
         ]
 
         mock_request.get(url=f"{BASE_URL}{year}", text=json.dumps(RESPONSE), status_code=200)
-        response = self.calendar_client.list(year)
+        response = self.subject.list(year)
         self.assertEqual(response, RESPONSE, "200 - Ok response not obtained")
 
     @requests_mock.mock()
@@ -37,5 +37,5 @@ class TestCalendarClient(TestCase):
         }
 
         mock_request.get(url=f"{BASE_URL}{year}", text=json.dumps(RESPONSE), status_code=404)
-        response = self.calendar_client.list(year)
+        response = self.subject.list(year)
         self.assertEqual(response, RESPONSE, "404 - Not Found response not obtained")

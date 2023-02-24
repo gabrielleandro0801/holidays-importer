@@ -6,7 +6,7 @@ from src.infrastructure.translators.holiday import HolidayTranslator, format_dat
 
 class TestHolidayTranslator(TestCase):
     def setUp(self) -> None:
-        self.holiday_translator = HolidayTranslator()
+        self.subject = HolidayTranslator()
 
     def test_must_translate_holiday_dict_to_holiday_object(self):
         holiday_dict = {
@@ -15,13 +15,13 @@ class TestHolidayTranslator(TestCase):
             "type": "national"
         }
 
-        response = self.holiday_translator.translate(holiday_dict)
+        response = self.subject.translate(holiday_dict)
         self.assertIsInstance(response, Holiday)
 
     def test_must_return_none_when_holiday_is_none(self):
         holiday = None
 
-        response = self.holiday_translator.clean(holiday)
+        response = self.subject.clean(holiday)
         self.assertIsNone(response, "Response was not None")
 
     def test_must_return_holiday_object_when_holiday_dict_is_valid(self):
@@ -31,7 +31,7 @@ class TestHolidayTranslator(TestCase):
             category="NATIONAL"
         )
 
-        response = self.holiday_translator.clean(holiday)
+        response = self.subject.clean(holiday)
         self.assertNotEqual(response, None, "Holiday was returned as None")
 
     def test_must_format_date_from_dashes_to_slashes(self):

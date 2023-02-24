@@ -21,13 +21,13 @@ class TestFebrabanHolidayApplicationService(TestCase):
         self.holiday_repository = mock.Mock()
         self.holiday_repository.save.return_value = SAVE_RESPONSE
 
-        self.application_service = FebrabanHolidayApplicationService(self.holiday_service, self.holiday_repository)
+        self.subject = FebrabanHolidayApplicationService(self.holiday_service, self.holiday_repository)
 
     def test_list_febraban_holidays_must_have_been_called_with_right_year(self):
         year = fake.unique.random_int()
         self.holiday_service.list_febraban_holidays.return_value = LIST_FEBRABAN_HOLIDAYS_EMPTY_RESPONSE
 
-        self.application_service.import_holidays(year)
+        self.subject.import_holidays(year)
         self.holiday_service.list_febraban_holidays.assert_called_once_with(year)
         self.holiday_repository.save.assert_called_once_with(LIST_FEBRABAN_HOLIDAYS_EMPTY_RESPONSE)
 
@@ -35,6 +35,6 @@ class TestFebrabanHolidayApplicationService(TestCase):
         year = fake.unique.random_int()
         self.holiday_service.list_febraban_holidays.return_value = LIST_FEBRABAN_HOLIDAYS_FULL_RESPONSE
 
-        self.application_service.import_holidays(year)
+        self.subject.import_holidays(year)
         self.holiday_repository.save.assert_called_once_with(LIST_FEBRABAN_HOLIDAYS_FULL_RESPONSE)
         self.holiday_repository.save.assert_called_once_with(LIST_FEBRABAN_HOLIDAYS_FULL_RESPONSE)
