@@ -1,0 +1,7 @@
+# To ignore these files when running tests
+[run]
+omit = *__init__.py, src/infrastructure/logger*, src/infrastructure/properties.py
+
+# To ignore these files when generating report
+[report]
+omit = *tests*, src/dependency_resolver.py

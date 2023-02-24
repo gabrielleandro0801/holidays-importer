@@ -8,3 +8,4 @@ six.py
 .env
 my_zip.zip
 .coverage
+htmlcov/

@@ -1,1 +1,1 @@
-from .holiday_translator import HolidayTranslator
+from .holiday import HolidayTranslator

@@ -75,6 +75,10 @@ or, if you want to see the report
 ``` shell
 coverage run -m unittest && coverage report
 ```
+or, if you want to see the HTML report
+``` shell
+coverage run -m unittest && coverage html
+```
 
 ### Acknowledgments :clap:
 Those links below helped me during the development.
